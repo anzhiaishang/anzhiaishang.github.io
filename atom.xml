@@ -6,7 +6,7 @@
   <link href="https://anzhiaishang.github.io/atom.xml" rel="self"/>
   
   <link href="https://anzhiaishang.github.io/"/>
-  <updated>2021-03-30T14:34:39.586Z</updated>
+  <updated>2021-03-30T13:42:23.710Z</updated>
   <id>https://anzhiaishang.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>js知识点</title>
-    <link href="https://anzhiaishang.github.io/2021/03/30/js%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>https://anzhiaishang.github.io/2021/03/30/js%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
-    <published>2021-03-30T13:46:34.786Z</published>
-    <updated>2021-03-30T14:34:39.586Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="js知识点"><a href="#js知识点" class="headerlink" title="js知识点"></a>js知识点</h1><p> 使用 prototype 属性就可以给对象的构造函数添加新的属性： </p><p>getElementsByTagName() 方法返回 HTMLCollection 对象。</p><p>HTMLCollection 对象<strong>类似</strong>包含 HTML 元素的一个数组。</p><p><strong>NodeList</strong> 对象是一个从文档中获取的节点列表 (集合) 。</p><p>NodeList 对象类似 <a href="https://www.runoob.com/js/js-htmldom-elements.html" target="_blank" rel="noopener">HTMLCollection</a> 对象。</p><p>一些旧版本浏览器中的方法（如：<strong>getElementsByClassName()</strong>）返回的是 NodeList 对象，而不是 HTMLCollection 对象。</p><p>实用的 JavaScript 方案（涵盖所有浏览器）：</p><h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><h5 id="确定浏览器窗口尺寸"><a href="#确定浏览器窗口尺寸" class="headerlink" title="确定浏览器窗口尺寸"></a>确定浏览器窗口尺寸</h5><p>var w=window.innerWidth<br>|| document.documentElement.clientWidth<br>|| document.body.clientWidth;</p><p>var h=window.innerHeight<br>|| document.documentElement.clientHeight<br>|| document.body.clientHeight;</p><p>一些其他方法：</p><ul><li>window.open() - 打开新窗口</li><li>window.close() - 关闭当前窗口</li><li>window.moveTo() - 移动当前窗口</li><li>window.resizeTo() - 调整当前窗口的尺寸</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;js知识点&quot;&gt;&lt;a href=&quot;#js知识点&quot; class=&quot;headerlink&quot; title=&quot;js知识点&quot;&gt;&lt;/a&gt;js知识点&lt;/h1&gt;&lt;p&gt; 使用 prototype 属性就可以给对象的构造函数添加新的属性： &lt;/p&gt;
-&lt;p&gt;getElementsByTa</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>对JS闭包的理解</title>
@@ -76,6 +55,25 @@
   </entry>
   
   <entry>
+    <title>记一次内网穿透</title>
+    <link href="https://anzhiaishang.github.io/2021/03/11/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <id>https://anzhiaishang.github.io/2021/03/11/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</id>
+    <published>2021-03-11T08:15:07.338Z</published>
+    <updated>2021-04-07T03:52:58.104Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="记一次内网穿透"><a href="#记一次内网穿透" class="headerlink" title="记一次内网穿透"></a>记一次内网穿透</h1><p>昨天中午买的小型主机到了，打算搭个个人网盘顺带当个服务器啥的。当我终于把网盘配置好并兴高采烈的把网盘地址分享给我的lsp群友时，他们跟我说：连不到网盘。</p><p>我说，啪的一下，很快啊，我就想起来我这网相当于一个局域网，外网应该是连不进来的。我说婷婷，我去搞个内网穿透试试。</p><p>然后昨晚就各种搜教程搞了一晚上。没整成。今天上午上完课回来就接着开干。当然还是没整成。但是我也算是搞懂了失败的原因，并找到了一个可行的解决方式，有钱了一定试o(╥﹏╥)o</p><a id="more"></a><p>内网穿透大概有两种形式</p><p>1.端口映射 需要路由器有公网ip，通过将公网ip+duankou与内网ip+端口绑定，使发到公网ip的数据被转发到目的内网端口。</p><p>2.反向代理 找个有公网ip的机器，反向代理，使送到有外网主机的数据被送到内网主机。</p><p>我一开始找的方法是用frp实现反向代理，失败原因就是没有有外网ip的主机。部署完了才发现没服务端。也试了其他一些类似的程序，差不多的失败。</p><p>然后我尝试用nat123设置端口映射，也不行。用路由器自带的端口转发，也是不行。最后意识到是因为我们这校园网分配给路由器的ip还是个内网ip，我也没办法进学校的机房搞 <img src="file:///D:%5CPersonal%5CTemp%5CSGPicFaceTpBq%5C13936%5C01126889.png" alt="img">   只能放弃这条路。</p><p>然后那就只能尝试方法2，所以就需要搞个云服务器，没钱钱，买不起，下次一定（</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;记一次内网穿透&quot;&gt;&lt;a href=&quot;#记一次内网穿透&quot; class=&quot;headerlink&quot; title=&quot;记一次内网穿透&quot;&gt;&lt;/a&gt;记一次内网穿透&lt;/h1&gt;&lt;p&gt;昨天中午买的小型主机到了，打算搭个个人网盘顺带当个服务器啥的。当我终于把网盘配置好并兴高采烈的把网盘地址分享给我的lsp群友时，他们跟我说：连不到网盘。&lt;/p&gt;
+&lt;p&gt;我说，啪的一下，很快啊，我就想起来我这网相当于一个局域网，外网应该是连不进来的。我说婷婷，我去搞个内网穿透试试。&lt;/p&gt;
+&lt;p&gt;然后昨晚就各种搜教程搞了一晚上。没整成。今天上午上完课回来就接着开干。当然还是没整成。但是我也算是搞懂了失败的原因，并找到了一个可行的解决方式，有钱了一定试o(╥﹏╥)o&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>TCP 带外数据传输</title>
     <link href="https://anzhiaishang.github.io/2021/01/01/TCP%20%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93/"/>
     <id>https://anzhiaishang.github.io/2021/01/01/TCP%20%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93/</id>
@@ -87,24 +85,6 @@
     
     <summary type="html">&lt;h1 id=&quot;TCP-带外数据传输&quot;&gt;&lt;a href=&quot;#TCP-带外数据传输&quot; class=&quot;headerlink&quot; title=&quot;TCP 带外数据传输&quot;&gt;&lt;/a&gt;TCP 带外数据传输&lt;/h1&gt;&lt;p&gt;2020.1.1&lt;/p&gt;
 &lt;p&gt;今天复习网络程序设计，里面提到了TCP的带外数据传输是由TCP报文的urg位和紧急指针实现的。但是书上说紧急指针指向的是紧急字段的下一字节。这与我之前复习计算机网络时，书上的描述不符。于是我找了几篇博文看了看，直接给我看蒙了。&lt;/p&gt;</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>html/html学习（3</title>
-    <link href="https://anzhiaishang.github.io/2020/12/26/html/html%E5%AD%A6%E4%B9%A0%EF%BC%883/"/>
-    <id>https://anzhiaishang.github.io/2020/12/26/html/html%E5%AD%A6%E4%B9%A0%EF%BC%883/</id>
-    <published>2020-12-26T07:06:11.487Z</published>
-    <updated>2020-07-16T15:58:16.142Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="html学习（3"><a href="#html学习（3" class="headerlink" title="html学习（3"></a>html学习（3</h1><p>2020.7.17</p><p>html5</p><a id="more"></a>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;html学习（3&quot;&gt;&lt;a href=&quot;#html学习（3&quot; class=&quot;headerlink&quot; title=&quot;html学习（3&quot;&gt;&lt;/a&gt;html学习（3&lt;/h1&gt;&lt;p&gt;2020.7.17&lt;/p&gt;
-&lt;p&gt;html5&lt;/p&gt;</summary>
     
     
     
