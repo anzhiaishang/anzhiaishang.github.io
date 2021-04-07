@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://anzhiaishang.github.io">
-  <title>将博客搬至CSDN | 今天又是摸鱼的一天呢</title>
+  <title>js知识点 | 今天又是摸鱼的一天呢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="将博客搬至CSDN">
+  <meta name="description" content="js知识点 使用 prototype 属性就可以给对象的构造函数添加新的属性：  getElementsByTagName() 方法返回 HTMLCollection 对象。 HTMLCollection 对象类似包含 HTML 元素的一个数组。 NodeList 对象是一个从文档中获取的节点列表 (集合) 。 NodeList 对象类似 HTMLCollection 对象。 一些旧版本浏览器中的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="将博客搬至CSDN">
-<meta property="og:url" content="https://anzhiaishang.github.io/2021/03/11/%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%87%B3CSDN/index.html">
+<meta property="og:title" content="js知识点">
+<meta property="og:url" content="https://anzhiaishang.github.io/2021/03/30/js%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
 <meta property="og:site_name" content="今天又是摸鱼的一天呢">
-<meta property="og:description" content="将博客搬至CSDN">
+<meta property="og:description" content="js知识点 使用 prototype 属性就可以给对象的构造函数添加新的属性：  getElementsByTagName() 方法返回 HTMLCollection 对象。 HTMLCollection 对象类似包含 HTML 元素的一个数组。 NodeList 对象是一个从文档中获取的节点列表 (集合) 。 NodeList 对象类似 HTMLCollection 对象。 一些旧版本浏览器中的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-11T09:34:05.656Z">
-<meta property="article:modified_time" content="2021-03-11T09:34:05.926Z">
+<meta property="article:published_time" content="2021-03-30T13:46:34.786Z">
+<meta property="article:modified_time" content="2021-03-30T14:34:39.586Z">
 <meta property="article:author" content="SlnVer">
 <meta name="twitter:card" content="summary">
   
@@ -70,7 +70,7 @@
 		<nav>
 			总文章数 
 		</nav>
-		总字数 <span class="post-count">32k</span>
+		总字数 <span class="post-count">9.1k</span>
 		<nav class="header-smart-menu">
     		
     			
@@ -164,24 +164,24 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-将博客搬至CSDN" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js知识点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      将博客搬至CSDN
+      js知识点
     </h1>
   
 
         
-        <a href="/2021/03/11/%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%87%B3CSDN/" class="archive-article-date">
-  	<time datetime="2021-03-11T09:34:05.656Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-11</time>
+        <a href="/2021/03/30/js%E7%9F%A5%E8%AF%86%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2021-03-30T13:46:34.786Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-30</time>
 </a>
         
         <div align="center" class="post-count">
-          字数: 6字 | 预计阅读时长: 1分钟
+          字数: 185字 | 预计阅读时长: 1分钟
         </div>
       </header>
     
@@ -189,7 +189,23 @@
       
         
           
-            <h1 id="将博客搬至CSDN"><a href="#将博客搬至CSDN" class="headerlink" title="将博客搬至CSDN"></a>将博客搬至CSDN</h1>
+            <h1 id="js知识点"><a href="#js知识点" class="headerlink" title="js知识点"></a>js知识点</h1><p> 使用 prototype 属性就可以给对象的构造函数添加新的属性： </p>
+<p>getElementsByTagName() 方法返回 HTMLCollection 对象。</p>
+<p>HTMLCollection 对象<strong>类似</strong>包含 HTML 元素的一个数组。</p>
+<p><strong>NodeList</strong> 对象是一个从文档中获取的节点列表 (集合) 。</p>
+<p>NodeList 对象类似 <a href="https://www.runoob.com/js/js-htmldom-elements.html" target="_blank" rel="noopener">HTMLCollection</a> 对象。</p>
+<p>一些旧版本浏览器中的方法（如：<strong>getElementsByClassName()</strong>）返回的是 NodeList 对象，而不是 HTMLCollection 对象。</p>
+<p>实用的 JavaScript 方案（涵盖所有浏览器）：</p>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><h5 id="确定浏览器窗口尺寸"><a href="#确定浏览器窗口尺寸" class="headerlink" title="确定浏览器窗口尺寸"></a>确定浏览器窗口尺寸</h5><p>var w=window.innerWidth<br>|| document.documentElement.clientWidth<br>|| document.body.clientWidth;</p>
+<p>var h=window.innerHeight<br>|| document.documentElement.clientHeight<br>|| document.body.clientHeight;</p>
+<p>一些其他方法：</p>
+<ul>
+<li>window.open() - 打开新窗口</li>
+<li>window.close() - 关闭当前窗口</li>
+<li>window.moveTo() - 移动当前窗口</li>
+<li>window.resizeTo() - 调整当前窗口的尺寸</li>
+</ul>
+
           
         
     </div>
@@ -246,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://anzhiaishang.github.io/2021/03/11/%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%87%B3CSDN/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://anzhiaishang.github.io/2021/03/30/js%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,8 +280,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2021/03/11/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">记一次内网穿透</div>
+    <a href="/2021/03/30/%E5%AF%B9JS%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对JS闭包的理解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -292,7 +308,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#将博客搬至CSDN"><span class="toc-number">1.</span> <span class="toc-text">将博客搬至CSDN</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#js知识点"><span class="toc-number">1.</span> <span class="toc-text">js知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM"><span class="toc-number">1.0.1.</span> <span class="toc-text">BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#确定浏览器窗口尺寸"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">确定浏览器窗口尺寸</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
