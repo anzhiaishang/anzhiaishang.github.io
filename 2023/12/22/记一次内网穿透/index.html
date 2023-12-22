@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SilentWaverの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="记一次内网穿透昨天中午买的小型主机到了，打算搭个个人网盘顺带当个服务器啥的。当我终于把网盘配置好并兴高采烈的把网盘地址分享给我的lsp群友时，他们跟我说：连不到网盘。 我说，啪的一下，很快啊，我就想起来我这网相当于一个局域网，外网应该是连不进来的。我说婷婷，我去搞个内网穿透试试。 然后昨晚就各种搜教程搞了一晚上。没整成。今天上午上完课回来就接着开干。当然还是没整成。但是我也算是搞懂了失败的原因，并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SilentWaverの博客">
+<meta property="og:url" content="http://silentwaver.online/2023/12/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:site_name" content="SilentWaverの博客">
+<meta property="og:description" content="记一次内网穿透昨天中午买的小型主机到了，打算搭个个人网盘顺带当个服务器啥的。当我终于把网盘配置好并兴高采烈的把网盘地址分享给我的lsp群友时，他们跟我说：连不到网盘。 我说，啪的一下，很快啊，我就想起来我这网相当于一个局域网，外网应该是连不进来的。我说婷婷，我去搞个内网穿透试试。 然后昨晚就各种搜教程搞了一晚上。没整成。今天上午上完课回来就接着开干。当然还是没整成。但是我也算是搞懂了失败的原因，并">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="file:///D:/Personal/Temp/SGPicFaceTpBq/13936/01126889.png">
+<meta property="article:published_time" content="2023-12-22T15:07:31.540Z">
+<meta property="article:modified_time" content="2023-12-22T15:07:31.537Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="file:///D:/Personal/Temp/SGPicFaceTpBq/13936/01126889.png">
+  
+    <link rel="alternate" href="/atom.xml" title="SilentWaverの博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SilentWaverの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://silentwaver.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-记一次内网穿透" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-12-22T15:07:31.540Z" itemprop="datePublished">2023-12-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="记一次内网穿透"><a href="#记一次内网穿透" class="headerlink" title="记一次内网穿透"></a>记一次内网穿透</h1><p>昨天中午买的小型主机到了，打算搭个个人网盘顺带当个服务器啥的。当我终于把网盘配置好并兴高采烈的把网盘地址分享给我的lsp群友时，他们跟我说：连不到网盘。</p>
+<p>我说，啪的一下，很快啊，我就想起来我这网相当于一个局域网，外网应该是连不进来的。我说婷婷，我去搞个内网穿透试试。</p>
+<p>然后昨晚就各种搜教程搞了一晚上。没整成。今天上午上完课回来就接着开干。当然还是没整成。但是我也算是搞懂了失败的原因，并找到了一个可行的解决方式，有钱了一定试o(╥﹏╥)o</p>
+<span id="more"></span>
+
+<p>内网穿透大概有两种形式</p>
+<p>1.端口映射 需要路由器有公网ip，通过将公网ip+duankou与内网ip+端口绑定，使发到公网ip的数据被转发到目的内网端口。</p>
+<p>2.反向代理 找个有公网ip的机器，反向代理，使送到有外网主机的数据被送到内网主机。</p>
+<p>我一开始找的方法是用frp实现反向代理，失败原因就是没有有外网ip的主机。部署完了才发现没服务端。也试了其他一些类似的程序，差不多的失败。</p>
+<p>然后我尝试用nat123设置端口映射，也不行。用路由器自带的端口转发，也是不行。最后意识到是因为我们这校园网分配给路由器的ip还是个内网ip，我也没办法进学校的机房搞 <img src="file:///D:\Personal\Temp\SGPicFaceTpBq\13936\01126889.png" alt="img">   只能放弃这条路。</p>
+<p>然后那就只能尝试方法2，所以就需要搞个云服务器，没钱钱，买不起，下次一定（</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://silentwaver.online/2023/12/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" data-id="clqgs976p000elspv4zoz3vhw" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/12/22/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E8%AE%BE%E8%AE%A1%20%E5%AE%9E%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/12/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E8%AE%BE%E8%AE%A1%20%E5%AE%9E%E9%AA%8C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

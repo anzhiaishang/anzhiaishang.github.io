@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>SilentWaverの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="kmeans算法实现中一些问题2020.11.22 本来，是没打算写一篇文的 然后发现自己写的代码计算出的平均准确度是错误的 然后我就疯了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SilentWaverの博客">
+<meta property="og:url" content="http://silentwaver.online/2023/12/22/kmeans%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="SilentWaverの博客">
+<meta property="og:description" content="kmeans算法实现中一些问题2020.11.22 本来，是没打算写一篇文的 然后发现自己写的代码计算出的平均准确度是错误的 然后我就疯了">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-22T15:07:31.491Z">
+<meta property="article:modified_time" content="2023-12-22T15:07:31.490Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SilentWaverの博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SilentWaverの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://silentwaver.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-kmeans算法实现中一些问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/22/kmeans%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2023-12-22T15:07:31.491Z" itemprop="datePublished">2023-12-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="kmeans算法实现中一些问题"><a href="#kmeans算法实现中一些问题" class="headerlink" title="kmeans算法实现中一些问题"></a>kmeans算法实现中一些问题</h1><p>2020.11.22</p>
+<p>本来，是没打算写一篇文的</p>
+<p>然后发现自己写的代码计算出的平均准确度是错误的</p>
+<p>然后我就疯了</p>
+<span id="more"></span>
+
+<p>我本计划通过比较保留数据集自带的标签与划分后的标签来判断精度，但是程序划分出的标签完全乱套了，无法确定哪个簇是哪个簇。</p>
+<p>硬改应该也能改出来，但只能适用于单个数据集，如何改成具有泛用性的代码，莫得头绪。<br>以下是我的源码，没什么必要看，我也放上了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> xlwt</span><br><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> open_workbook</span><br><span class="line"><span class="keyword">from</span> xlutils.copy <span class="keyword">import</span> copy</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">listA = [] </span><br><span class="line">        </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">distE</span>(<span class="params">vecA,vecB</span>):</span><br><span class="line">    <span class="keyword">return</span> sqrt(<span class="built_in">sum</span>(power(vecA-vecB,<span class="number">2</span>)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loadData</span>(<span class="params">filename,n</span>):</span><br><span class="line">    dataMat = []</span><br><span class="line">    fr = <span class="built_in">open</span>(filename)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</span><br><span class="line">        curLine = line.strip(<span class="string">&#x27;\n&#x27;</span>).split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        temp=curLine[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">del</span> curLine[<span class="number">0</span>]</span><br><span class="line">        listA.append(temp)</span><br><span class="line">        <span class="comment">#listA.append(curLine)</span></span><br><span class="line">        fltLine = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">float</span>,curLine))</span><br><span class="line">        dataMat.append(fltLine)</span><br><span class="line">    <span class="keyword">return</span> dataMat</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">randCent</span>(<span class="params">dataSet, k</span>):</span><br><span class="line">    n = shape(dataSet)[<span class="number">1</span>]</span><br><span class="line">    centroids = mat(zeros((k,n)))   </span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        minJ = <span class="built_in">min</span>(dataSet[:,j]) </span><br><span class="line">        maxJ = <span class="built_in">max</span>(dataSet[:,j])</span><br><span class="line">        rangeJ = <span class="built_in">float</span>(maxJ - minJ)</span><br><span class="line">        centroids[:,j] = minJ + rangeJ * random.rand(k, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> centroids</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">kMeans</span>(<span class="params">dataSet, k, distMeans =distE, createCent = randCent</span>):</span><br><span class="line">    m = shape(dataSet)[<span class="number">0</span>]</span><br><span class="line">    clusterAssment = mat(zeros((m,<span class="number">2</span>)))    </span><br><span class="line">    centroids = createCent(dataSet, k)</span><br><span class="line">    clusterChanged = <span class="literal">True</span>   </span><br><span class="line">    <span class="keyword">while</span> clusterChanged:</span><br><span class="line">        clusterChanged = <span class="literal">False</span>;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):  </span><br><span class="line">            minDist = inf; minIndex = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">                distJI = distMeans(centroids[j,:], dataSet[i,:])</span><br><span class="line">                <span class="keyword">if</span> distJI &lt; minDist:</span><br><span class="line">                    minDist = distJI; minIndex = j  </span><br><span class="line">            <span class="keyword">if</span> clusterAssment[i,<span class="number">0</span>] != minIndex: clusterChanged = <span class="literal">True</span>; </span><br><span class="line">            clusterAssment[i,:] = minIndex,minDist**<span class="number">2</span>   </span><br><span class="line">        <span class="comment">#print(centroids)</span></span><br><span class="line">        <span class="keyword">for</span> cent <span class="keyword">in</span> <span class="built_in">range</span>(k):   </span><br><span class="line">            ptsInClust = dataSet[nonzero(clusterAssment[:,<span class="number">0</span>].A == cent)[<span class="number">0</span>]]   </span><br><span class="line">            centroids[cent,:] = mean(ptsInClust, axis = <span class="number">0</span>) </span><br><span class="line">    <span class="keyword">return</span> centroids, clusterAssment</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">accCalu</span>(<span class="params">clus</span>):</span><br><span class="line">    <span class="keyword">global</span> listA</span><br><span class="line">    mable=[]</span><br><span class="line">    acc = <span class="number">0</span></span><br><span class="line">    n=<span class="number">0</span></span><br><span class="line">    total = <span class="built_in">len</span>(listA)</span><br><span class="line">    listA=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,listA))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> clus:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(i, <span class="built_in">list</span>):</span><br><span class="line">            mable.append(<span class="built_in">int</span>(i[<span class="number">0</span>])+<span class="number">1</span>)  </span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> mable:</span><br><span class="line">        <span class="keyword">if</span> j == listA[n]:</span><br><span class="line">            acc=acc+<span class="number">1</span></span><br><span class="line">        n=n+<span class="number">1</span></span><br><span class="line">    <span class="comment">#print(&#x27;准确度: &#123;:.2f&#125;%&#x27;.format((acc/total)*100))</span></span><br><span class="line">    <span class="built_in">print</span>(mable)</span><br><span class="line">    <span class="built_in">print</span>(clus)</span><br><span class="line">    <span class="keyword">return</span> (acc/total)*<span class="number">100</span>       </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">datMat = mat(loadData(<span class="string">&#x27;Ecoli.txt&#x27;</span>,<span class="number">8</span>))</span><br><span class="line">cnt_times=<span class="number">1</span></span><br><span class="line">TStime = time.time()</span><br><span class="line">TaccA = <span class="number">0</span>  </span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>): </span><br><span class="line">    starttime = time.time()   </span><br><span class="line">    myCentroids,clustAssing = kMeans(datMat,<span class="number">8</span>)</span><br><span class="line">    endtime = time.time()</span><br><span class="line">    dtime = endtime - starttime</span><br><span class="line">    accA = accCalu(clustAssing.tolist())</span><br><span class="line">    listR=[]</span><br><span class="line">    listR.append([accA,dtime])</span><br><span class="line">    TaccA += accA</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    cnt_times+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>(cnt_times&gt;<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">TEtime = time.time()</span><br><span class="line">TDtime = TEtime - TStime</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;平均准确度: &#123;:.2f&#125;%&#x27;</span>  .<span class="built_in">format</span>(TaccA/<span class="number">100</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;总训练时间：%.8s s&quot;</span> % TDtime)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://silentwaver.online/2023/12/22/kmeans%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%B8%AD%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" data-id="clqgs97340003lspvgs8ccw42" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/12/22/pip%20%E6%8D%A2%E6%BA%90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/12/22/html/html%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/12/22/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E8%AE%BE%E8%AE%A1%20%E5%AE%9E%E9%AA%8C/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/22/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
